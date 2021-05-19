@@ -27,8 +27,12 @@ workflows:
   holms-test:
     #my jobs
     jobs:
-      - print_var
-     # - printhello
-     # - printworld:
-     #     requires:
-     #       - printhello
+      build:
+        docker:
+          - image: cimg/base:2020.01
+        steps:
+          - checkout
+          - run:
+              name: "echo an env var that is part of our project"
+              command: |
+                echo $DevName
