@@ -14,25 +14,21 @@ jobs:
       - run: echo "Hello "
   print_var:
     docker:
-      - image: circleci/node:13.8.0
-    steps:
-      - checkout
-      - run:
-          name: "echo an env var that is part of our project"
-          command: |
-            echo $DevName
+      - image: cimg/base:2020.01
+      steps:
+        - checkout
+        - run:
+            name: "echo an env var that is part of our project"
+            command: |
+              echo $DevName
 
 workflows:
   # Name the workflow "welcome"
   holms-test:
     #my jobs
     jobs:
-      build:
-        docker:
-          - image: cimg/base:2020.01
-        steps:
-          - checkout
-          - run:
-              name: "echo an env var that is part of our project"
-              command: |
-                echo $DevName
+      - print_var
+     # - printhello
+     # - printworld:
+     #     requires:
+     #       - printhello
