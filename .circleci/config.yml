@@ -9,14 +9,14 @@ jobs:
   printhello:
     docker:
       - image: circleci/node:13.8.0
-      steps:
+    steps:
         - run: echo "Hello "
     printworld:
       requires:
         - printhello
       docker:
         - image: circleci/node:13.8.0
-        steps:
+      steps:
           - run: echo "Hello "
 workflows:
   # Name the workflow "welcome"
