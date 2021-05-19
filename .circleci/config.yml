@@ -29,7 +29,8 @@ workflows:
   welcome:
     #my jobs
     jobs:
-      - printhello
-      - printworld:
-          requires:
-            - printhello
+      - print_var
+     # - printhello
+     # - printworld:
+     #     requires:
+     #       - printhello
