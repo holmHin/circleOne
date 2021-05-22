@@ -2,6 +2,25 @@
 version: 2.1
 
 jobs:
+  save_hello_world_ouput:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - run: echo "Hello Output !" > /tmp/out1.txt
+      - persist_to_workspace:
+          root: /tmp/worspace
+          paths:
+            - /tmp/out1.txt
+
+
+  print output:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - attach_workspace:
+          at: /tmp/workspace
+      - run: echo /tmp/workspace/out1.txt
+
   printhello:
     docker:
       - image: circleci/node:13.8.0
@@ -27,7 +46,10 @@ workflows:
   holms-test:
     #my jobs
     jobs:
-      - print_var
+      - save_hello_world_ouput
+      - print output
+          requires:
+            - save_hello_world_ouput
      # - printhello
      # - printworld:
      #     requires:
