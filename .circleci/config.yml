@@ -13,7 +13,7 @@ jobs:
             - /tmp/out1.txt
 
 
-  print output:
+  print_output:
     docker:
       - image: circleci/node:13.8.0
     steps:
@@ -47,7 +47,7 @@ workflows:
     #my jobs
     jobs:
       - save_hello_world_ouput
-      - print output
+      - print_output:
           requires:
             - save_hello_world_ouput
      # - printhello
