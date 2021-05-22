@@ -19,7 +19,7 @@ jobs:
     steps:
       - attach_workspace:
           at: /tmp
-      - run: echo /tmp/out1.txt
+      - run: cat /tmp/out1.txt
 
   printhello:
     docker:
