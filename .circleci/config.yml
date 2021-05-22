@@ -6,16 +6,20 @@ defaults: &environment
     - image: circleci/node:13.8.0
 
 commands:
-  say_hello:
-    description: "A test command"
-    parameters:
-      to:
-        type: string
-        default: "Name"
+  print_pipeline_id:
+    description: "Show me the workflowID"
       steps:
-        - run: echo "Hello <<parameters.to>>"
+        - run: echo $CIRCLE_WORKFLOW_ID
 
 jobs:
+
+
+  use_command:
+    <<: *environment
+    steps:
+     - print_pipeline_id
+
+
   save_hello_world_ouput:
     <<: *environment
     steps:
@@ -61,10 +65,11 @@ workflows:
   holms-test:
     #my jobs
     jobs:
-      - save_hello_world_ouput
-      - print_output:
-          requires:
-            - save_hello_world_ouput
+      - use_command
+    #  - save_hello_world_ouput
+    #  - print_output:
+    #      requires:
+     #       - save_hello_world_ouput
      # - printhello
      # - printworld:
      #     requires:
