@@ -5,6 +5,16 @@ defaults: &environment
   docker:
     - image: circleci/node:13.8.0
 
+commands:
+  say_hello:
+    description: "A test command"
+    parameters:
+      to:
+        type: string
+        default: "Name"
+      steps:
+        - run: echo "Hello <<parameters.to>>"
+
 jobs:
   save_hello_world_ouput:
     <<: *environment
@@ -22,6 +32,9 @@ jobs:
       - attach_workspace:
           at: /tmp
       - run: cat /tmp/out1.txt
+
+
+
 
   printhello:
     docker:
