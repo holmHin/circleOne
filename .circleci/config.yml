@@ -13,7 +13,6 @@ commands:
 
 jobs:
 
-
   use_command:
     <<: *environment
     steps:
@@ -28,6 +27,18 @@ jobs:
           root: /tmp
           paths:
             - out1.txt
+  error_job:
+    <<: *environment
+    steps:
+      - run: echo CALL
+      - return 1
+
+    steps:
+      - run: echo FAILED!
+      - when: on_error
+    steps:
+      - run: echo SUCCSESS!
+      - when: on_success
 
 
   print_output:
@@ -65,7 +76,8 @@ workflows:
   holms-test:
     #my jobs
     jobs:
-      - use_command
+      - error_job
+    #  - use_command
     #  - save_hello_world_ouput
     #  - print_output:
     #      requires:
