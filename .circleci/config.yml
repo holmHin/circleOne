@@ -1,10 +1,13 @@
 # Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
+defaults: &environment
+  docker:
+    - image: circleci/node:13.8.0
+
 jobs:
   save_hello_world_ouput:
-    docker:
-      - image: circleci/node:13.8.0
+    <<: *environment
     steps:
       - run: echo "Hello Output !" > /tmp/out1.txt
       - persist_to_workspace:
@@ -14,8 +17,7 @@ jobs:
 
 
   print_output:
-    docker:
-      - image: circleci/node:13.8.0
+    <<: *environment
     steps:
       - attach_workspace:
           at: /tmp
