@@ -30,15 +30,15 @@ jobs:
   error_job:
     <<: *environment
     steps:
-      - run: echo CALL
-      - return 1
-
-    steps:
-      - run: echo FAILED!
-      - when: on_error
-    steps:
-      - run: echo SUCCSESS!
-      - when: on_success
+      - run:
+          echo CALL
+          return 1
+      - run:
+          echo FAILED!
+          when: on_error
+      - run:
+          echo SUCCSESS!
+          when: on_success
 
 
   print_output:
