@@ -8,9 +8,9 @@ jobs:
     steps:
       - run: echo "Hello Output !" > /tmp/out1.txt
       - persist_to_workspace:
-          root: /tmp/worspace
+          root: /tmp
           paths:
-            - /tmp/out1.txt
+            - out1.txt
 
 
   print_output:
@@ -18,8 +18,8 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - attach_workspace:
-          at: /tmp/workspace
-      - run: echo /tmp/workspace/out1.txt
+          at: /tmp
+      - run: echo /tmp/out1.txt
 
   printhello:
     docker:
@@ -54,3 +54,4 @@ workflows:
      # - printworld:
      #     requires:
      #       - printhello
+
